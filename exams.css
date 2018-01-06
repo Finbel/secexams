@@ -1,0 +1,106 @@
+.subjects-table{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:200%;
+}
+.question-row>.alt-text{
+	background-color: #F0F0F0;
+}
+.subject-question {
+	border: 2px solid #707070  !important;
+	margin-bottom: 10vh	;
+	height: 20vh;
+}
+
+.subject-question tr td:first-child{
+	background-color: #F8F8F8;
+}
+
+body { 
+    padding-top: 100px; 
+}
+
+.navbar-brand, #subject-title{
+	font-size:250%;
+}
+
+#subject-title{
+	margin-right: 65px;
+}
+
+.container{
+	width: auto;
+}
+
+.navbar{
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.answer-row {
+    display:table-cell;
+}
+.answer-row.table-hidden{
+    display:none;
+}
+
+.show-subjects {
+	display: none;
+}
+
+.show-subjects.visible {
+	display: block;
+}
+
+#subjects-table {
+	display: none;
+}
+
+#subjects-table.visible {
+	display: block;
+}
+
+.subject, .questions, .importance{
+	padding: 10px 20px 10px 20px; 
+}
+
+.table-curved {
+    border-collapse: separate;
+}
+.table-curved {
+    border-radius: 6px;
+    border-left:0px;
+}
+.table-curved th {
+    border-top: none;
+}
+.table-curved th:first-child {
+    border-radius: 6px 0 0 0;
+}
+.table-curved th:last-child {
+    border-radius: 0 6px 0 0;
+}
+.table-curved th:only-child{
+    border-radius: 6px 6px 0 0;
+}
+.table-curved tr:last-child td:first-child {
+    border-radius: 0 0 0 6px;
+}
+.table-curved tr:last-child td:last-child {
+    border-radius: 0 0 6px 0;
+}
+
+.question{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size:200%;
+}
+
+.alt-text{
+	color: #808080;
+	font-size:200%;
+    text-align:center; 
+    vertical-align:middle;
+}
+
+.answer-text{
+	font-size:140%;
+}

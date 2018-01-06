@@ -1,0 +1,495 @@
+var exams = {
+"cryptography" : {
+		"importance" : 28,
+		"questions" : [
+			{
+				"question" : "Which mathematical problem must be solved to break RSA w.o. brute-force",
+				"sources" : "701",
+				"answer" : "Factoring the product of two primes"
+			},
+			{
+
+				"question" : "Which mathematical problem must be solved to break diffie-hellman w.o. brute-force",
+				"sources" : "706",
+				"answer" : "Calculating discrete logarithms"
+			},
+			{
+
+				"question" : "Explain the Electronic Codebook Mode (ECB)",
+				"sources" : "68",
+				"answer" : "A block mode of encrypting where you divide the code into M1, M2, ... , Mn and encrypt as blocks E(M1), E(M2), ... , E(Mn)"
+			},
+			{
+
+				"question" : "Explain Message Authentication Code",
+				"sources" : "69-70",
+				"answer" : "A has a message to send to B, it calculates the message authentication code as a complex function of the message and the key MAC_m = F(K_ab,M). The message plus code are transmitted to B. B perform the same algorithm on the message and compares the result to the code received."
+			},
+			{
+
+				"question" : "Explain all the requirements of a hash function H",
+				"sources" : "73",
+				"answer" : "<ul><li>H can be applied to arbitrary sized input</li><li>H results in a fixed size output</li><li>H is computationally easy to compute.</li><li>H is one-way (preimage-resistant), it’s impossible to get the message from the hash</li><li>H is weak collision resistant (second preimage-resistant), given h(x)=h, it’s hard to find a y != x, such that h(y)=h.</li><li>H is strong collision resistant, it’s hard to find x and y != x such that h(x)=h(y)</li></ul>"
+			},
+			{
+
+				"question" : "Explain the Diffie-Hellman Key Exchange",
+				"sources" : "706-708",
+				"answer" : "Both users create private keys X and calculate public keys Y = α^X mod q. Both users will get the same private key when they calculate Y(other)^X(own) mod q. Note: Diffie-Hellman is susceptible to a man-in-the-middle attack"
+			},
+			{
+
+				"question" : "Explain Digital envelopes",
+				"sources" : "83-84",
+				"answer" : "<ul><li>Randomly generate symmetric key</li><li>Encrypt message with symmetric key</li><li>Encrypt symmetric key with public key encryption</li><li>Send cipher and encrypted key</li><li>Receiver decrypts key with private key</li><li>Receiver decrypts the message with symmetric key</li></ul>"
+			}
+		]
+	},
+
+
+
+	"malware" : {
+		"importance" : 19,
+		"questions" : [
+			{
+				"question" : "How virus prevent themselves from being detected?",
+				"sources" : "228-229",
+				"answer" : "<ul><li>Encryption, prevent constant bit patterns</li><li>Polymorphic, changes the copies, functionally equivalent but different bit patterns</li><li>Metamorphic, may change behavior as well as appearance</li></ul>"
+			},
+			{
+				"question" : "What are backdoors?",
+				"sources" : "246",
+				"answer" : "A secret entry point into a program that allow an attacker use them to gain unauthorized access to the system."
+			},
+			{
+				"question" : "What is a trojan",
+				"sources" : "239-240",
+				"answer" : "An apparently useful program that when invoked perform some unwanted or harmful action."
+			},
+			{
+				"question" : "Explain the phases in a virus/worm life-span",
+				"sources" : "225",
+				"answer" : "<ul><li>Dormant phase: idle, unactivated</li><li>Propagation phase: making copies of itself</li><li>Triggering phase: activated to perform its intended function</li><li>Execution phase: The function is performed</li></ul>"
+			},
+			{
+				"question" : "What are botnets used for?",
+				"sources" : "243",
+				"answer" : "<ul><li>DDoS attacks</li><li>Spamming</li><li>Spreading new Malware</li><li>Manipulating online polls/games</li></ul>"
+			},
+			{
+				"question" : "Two security threats introduced by the AutoRun component",
+				"sources" : "",
+				"answer" : "<ul><li>A propagation mechanism for worms</li><li>A delivery mechanism for viruses through social engineering</li></ul>"
+			},
+			{
+				"question" : "Name and explain what properties can make worms dangerous",
+				"sources" : "236",
+				"answer" : "<ul><li>Polymorphic, changes the copies, functionally equivalent but different bit patterns</li><li>Metamorphic, may change behavior as well as appearance</li><li>Zero-day exploits, weaknesses not detected yet</li><li>Multi-exploit, making use of several weaknesses, i.e. web servers, email and file sharing</li><li>Multiplatform, not being limited to Windows but attacking several different platforms through cross-platform scripting languages</li></ul>"
+			},
+			{
+				"question" : "Describe the behavior of encrypted viruses",
+				"sources" : "226-227",
+				"answer" : "<ul><li>Compress the executable: P</li><li>Encrypt the payload V: enc(K,V)</li><li>Append bootstrap code:	dec</li><li>Append decryption key: K</li><li>Execute the bootstrap code: dec and decrypt the payload</li><li>Execute the payload: V</li><li>Execute the executable:	P</li></ul>"
+			}
+		]
+	},
+
+	"buffer-overflow" : {
+			"importance" : 15.75,
+			"questions" : [
+				{
+					"question" : "Make a drawing to show what a buffer overflow attack on the stack looks like. How does it work?",
+					"sources" : "359-360",
+					"answer" : "code:<br><b>char A[1]<br>char B[1]</b><br>stack:<table><tr><td>address 2</td><td>space for variable A</td></tr><tr><td>address 1</td><td>space for variable B</td></tr></table>If more bytes than allocated on the stack is written to B, it will overwrite A above it. The stack grows up."
+				},
+				{
+					"question" : "Explain what kinds of protection against buffer overflow that you can apply as a programmer.",
+					"sources" : "379-385",
+					"answer" : "<ul><li>Choose a high level language.</li><li>Use safe coding techniques, inspect and test code, avoid unsafe library functions.</li><li>Replace standard libraries with safer versions such as Libsafe.</li><li>Use extensions that protect against buffer overflow, such as Stackguard that implements protections like canaries at the end of frame pointers.</li><li>Block execution of code on the stack.</li><li>Use address space randomization to make address guessing hard.</li><li>Place guard pages in the virtual address space that are flagged in the MMU as illegal addresses.</li></ul>"
+				},
+				{
+					"question" : "How can an attacker with a buffer overflow attack run their own code?",
+					"sources" : "372-379",
+					"answer" : "By writing shellcode to a variable which they know the memory address of and then changing the return instruction pointer of a function to point to that address. This can be enhanced by prepending the bytecode with a series of NOP instructions, then the guess of memory address only has to hit one of the NOP instructions which will eventually lead to the executable code. This is called a NOP sled."
+				},
+				{
+					"question" : "Identify buffer overflow in code (in the following exam[problem])<ul><li>10.12.14[1]</li><li>14.01.14[9]</li><li>16.01.16[8]</li></ul>",
+					"sources" : "358-362",
+					"answer" : "<ul><li>10.12.14[1]<ul><li>Line 7: the input to password can cause a buffer overflow into hashed_pw and username. If the user knows what hash function is used they can hash any password and overwrite hashed_pw with the hash of their provided password.</li></ul></li><li>14.01.14[9]<ul><li>Line 6: The input might not contain a null character which will cause a crash.</li><li>Line 10: No control on the size of pwd has been made and risk of overwriting str1 (and thus the password to be checked) is imminent.</li><li>FIX: for-loop from 0 to 7, break if null-character, if never breaking, check that pwd[8] is null character. If not, end program with error message that password is too long.</li></ul></li><li>16.01.16[8]<ul><li>Line 7: Since n might be a lie, this can cause a buffer overflow.</li><li>Line 8: Might never send the null character and cause a crash.</li></ul></li></ul>"
+				},
+				{
+					"question" : "What are canaries and how can they help against buffer overflow attacks?",
+					"sources" : "383",
+					"answer" : "It’s a value below the old frame pointer address, before the allocation of space for local variables. It checks this value before restoring the old frame pointer and returning control back to the return address. If it has been altered the program can exit gracefully."
+				}
+		]
+	},
+
+
+
+	"authentication" : {
+		"importance" : 15.75,
+		"questions" : [
+			{
+				"question" : "What is the purpose of storing password hashes",
+				"sources" : "100",
+				"answer" : "If the password file is leaked, confidentiality of the cleartext passwords remain"
+			},
+			{
+				"question" : "Why should we protect the access to the password hashes?",
+				"sources" : "103",
+				"answer" : "An attacker can still hash passwords from a dictionary and compare against the password file. With a rainbow file the attacker can directly compare against the password file."
+			},
+			{
+				"question" : "What is the purpose of salts?",
+				"sources" : "101-102",
+				"answer" : "<ul><li>Prevents duplicate passwords being visible in the password file (requires different salts).</li><li>Increases the difficulty of an offline dictionary attack.</li><li>Prevents the attacker from identifying if a person have the same password on multiple systems.</li></ul>"
+			},
+			{
+				"question" : "Give an example each for authentication by something you know, something you have, something you are, something you do.",
+				"sources" : "95",
+				"answer" : "<ul><li>Know: PIN-code</li><li>Have: Physical key</li><li>Are: Fingerprint/retinal scanner</li><li>Do: Voice recognition</li></ul>"
+			},
+			{
+				"question" : "List and explain ways of attacking password-based authentication and appropriate countermeasures for these.",
+				"sources" : "99-100",
+				"answer" : "<ul><li>Offline dictionary attack, i.e. rainbow table<ul><li>Prevention of unauthorized access to password file</li><li>Rapid reissuance of passwords if file is leaked</li></ul></li><li>Brute-force attack<ul><li>Account lockout-mechanism after a number of failed login attempts</li></ul></li><li>Popular password attack<ul><li>Policies inhibiting common passwords</li></ul></li><li>Password guessing against single user<ul><li>Training and enforcing password policies</li><li>character set inhibition</li><li>forced password-change after a given time period</li></ul></li><li>Exploiting multiple password use<ul><li>Policies forbidding same or similar passwords on multiple devices</li></ul></li><li>Electronic monitoring<ul><li>Not communicate the password across a network, (encryption is not safe enough).</li></ul></li></ul>"
+			},
+			{
+				"question" : "How can a user attack a hashed but not salted password file?",
+				"sources" : "103",
+				"answer" : "Dictionary attack by hashing and comparing"
+			},
+			{
+				"question" : "What is the problem with using the same salt for each user?",
+				"sources" : "102",
+				"answer" : "Duplicate passwords create duplicate salted hashes. Thus if one is cracked, all of them are cracked."
+			},
+			{
+				"question" : "What is the good with unique salts?",
+				"sources" : "102",
+				"answer" : "A dictionary attack becomes harder by the number of different salt used, since each salt needs to be tried. One cracked password doesn’t crack all duplicates."
+			}
+		]
+	},
+"CIA" : {
+		"importance" : 15,
+		"questions" : [
+			{
+				"question" : "Explain the three components of CIA",
+				"sources" : "33",
+				"answer" : "<ul><li>Confidentiality: the resource is protected from unauthorized read access.</li><li>Integrity: the resource is protected from unauthorized write (change or delete) access.</li><li>Availability: the resource can be accessed by authorized subjects in an unaltered way.</li></ul>"
+			},{
+				"question" : "For each component of CIA, give one measure for protection.",
+				"sources" : "33, 67-84, 280",
+				"answer" : "<ul><li>C: encryption</li><li>I:<ul><li>Message authentication codes</li><li>hashes (asymmetric encryption, symmetric encryption, secret value)</li><li>digital signatures</li></ul></li><li>A: firewall</li></ul>"
+			},{
+				"question" : "Provide an example of condentiality loss and integrity loss in e-mail system",
+				"sources" : "34",
+				"answer" : "<ul><li>Confidentiality loss: e-mails are leaked</li><li>Integrity loss: man-in-the-middle attack, e-mails are changed on the way</li></ul>"
+			}
+		]
+	},
+
+
+	"firewalls" : {
+			"importance" : 14,
+			"questions" : [
+				{
+					"question" : "What is a default risk averse firewall setting?",
+					"sources" : "329",
+					"answer" : "A firewall where the default is to drop packets that aren’t accepted by any explicit rules."
+				},
+				{
+					"question" : "Explain purpose and content of a demilitarized zone (DMZ)",
+					"sources" : "337",
+					"answer" : "When you have two (or more firewalls). Inside the exterior firewall you place systems that should be externally available but still need some measure of protection. The interior firewall protects the remainder of the enterprise. The area between the firewalls s called the DMZ."
+				},
+				{
+					"question" : "Explain the strengths and weaknesses of:<ul><li>A firewall at the network perimeter</li><li>Firewalls on every end host machine</li><li>All of the above</li></ul>",
+					"sources" : "334-339",
+					"answer" : "<ul><li>A firewall at the network perimeter<ul><li>Strenghts: Protects the entire network.</li><li>Weaknesses: Has to be handel traffic for several different hosts with different needs. Single point weakness, if it’s breached the whole system is compromised.</li></ul></li><li>Firewalls on every end host machine<ul><li>Strenghts: Highly configurable for the specific hosts applications and demands, can thus be made more secure through the principle of least privilege.</li><li>Weaknesses: High overhead costs to customize firewalls for every host machine. Network hosts like routers could still get infected compromising the confidentiality of traffic between host machines.</li></ul></li><li>All of the above<ul><li>Strength: By both protecting the end hosts by configurable firewalls and the network through a network perimeter firewall the network would have a robust firewall protection against malicious attacks.</li><li>Weaknesses: High overhead costs to customize firewalls for every host machine and keep a network perimeter firewall up.</li></ul></li></ul>",
+				},
+				{
+					"question" : "Explain difference between stateful inspection firewall and packet filtering firewall",
+					"sources" : "332",
+					"answer" : "A stateful inspection doesn’t just observe individual packets but instead observe connections, it is stateful and can allow packets belonging to connections based on how they were established."
+				},
+				{
+					"question" : "Depict using a diagram and describe in detail a setup (e.g. the network topology, the involved routers gateways, the type and the configuration of the involved firewalls) that guarantees the following properties:<ul><li>workstations can not access external services, with the exception of web sites (using http https)</li><li>no connection can be established from the external network to a workstation</li><li>workstations can send e-mail using the internal SMTP-server</li><li>the internal SMTP-server can both send and receive email to/from Internet</li></ul>",
+					"sources" : "229-239",
+					"answer" : "Two firewalls, SMTP-server in between as DMZ-network. Both firewall allow traffic with SMTP-protocol in both directions, but only with the DMZ-network as source/destination. Use stateful firewalls to ensure that we only allow traffic on http or https through from the internet if the connection was established from the inside."
+				}
+		]
+	},
+
+	"denial-of-service" : {
+			"importance" : 11.375,
+			"questions" : [
+				{
+					"question" : "What is a denial of service attack?",
+					"sources" : "261",
+					"answer" : "An attempt to compromise availability by hindering or blocking completely the provision of some service."
+				},
+				{
+					"question" : "Explain reflection",
+					"sources" : "275",
+					"answer" : "The actual target is the spoofed address in the packets sent (usually TCP SYN-packets), the system will respond with a SYN-ACK-packet to complete the handshake. These response packets will overwhelm the target causing a DoS. It’s harder to track a reflected attack, especially if directed at a high traffic server, i.e. a DNS server."
+				},
+				{
+					"question" : "Explain amplification",
+					"sources" : "277-278",
+					"answer" : "Similar to reflection attacks but also multiplies the responses for each request sent. This is done by, for example, directing the original request to the directed broadcast address for some network. It can also be done by directing the attack to a DNS server where the responses are much larger than the requests."
+				},
+				{
+					"question" : "How does a SYN spoofing attack work, what is the effect?",
+					"sources" : "266-267",
+					"answer" : "The syn spoof abuses the TCP-protocol handshake by spoofing the source address. It will send a SYN-packet, the target will respond with a SYN-ACK to complete the hand-shake. This packet will go to the spoofed address instead, preventing the attacker to be overwhelmed. The spoofed address might not be in use, or it will respond with a TCP RST-packet which will only increase the DoS-attack."
+				},
+				{
+					"question" : "Explain what is IP source address spoofing and why is it possible on the Internet",
+					"sources" : "264-265",
+					"answer" : "It’s because an attacker can gain raw access to the network interface and thus change specific information in the packets that are going out. It is possible because the TCP/IP-stack wasn’t designed with malintent in thought and since then the infrastructure that enables IP-spoofing has become ingrained in so many applications that it’s difficult to remove."
+				},
+				{
+					"question" : "Explain countermeasures for denial of service attacks.",
+					"sources" : "280",
+					"answer" : "<ul><li>Provide backup resources (such as servers) available on demand.</li><li>Detect and filter attacks through the combination of intrusion detection systems and firewalls.</li><li>Network Ingress Filtering: Having routers filter out traffic with impossible source addresses.</li></ul>"
+				},
+				{
+					"question" : "Where in the network can one best detect IP spoofing?",
+					"sources" : "280",
+					"answer" : "As close to the attacker as possible, if the space of possible IP-addresses is small it’s easy to see if a packet couldn’t have originated on that interface."
+				}
+		]
+	},
+
+
+	"multilevel-security" : {
+			"importance" : 8.75,
+			"questions" : [
+				{
+					"question" : "What is the purpose of the no-write-down policy in the Bell La-Padula model?",
+					"sources" : "462",
+					"answer" : "A user can only write to documents with a higher or equal security leven."
+				},
+				{
+					"question" : "KTH wants to adopt a multi-level mandatory access control system to make sure upcoming exams are kept confidential.<ul><li>Which system would you choose for this purpose and why?</li><li>What difficulties can you foresee if such a system were adopted?</li></ul>",
+					"sources" : "460-468",
+					"answer" : "<ul><li>Which system would you choose for this purpose and why?<ul><li>Bell La-Padula would be good since it’s designed around protecting the confidentiality of documents. The staff designing the exams would not be able to write to documents that students can read and thus would not be able to (voluntarily or involuntarily) pass down information about the content of the exams.</li></ul></li><li>What difficulties can you foresee if such a system were adopted?<ul><li>If a teacher need to view or write the exam their security level will forbid them from writing to any document students can read, causing natural problems in teacher-student communication.</li></ul></li></ul>"
+				},
+				{
+					"question" : "What is the meaning of the no-read-up-no-write-down policy in Bell LaPadula and what does it protect against?",
+					"sources" : "462",
+					"answer" : "<ul><li>No read up: Users can only read documents with a lower or equal security.</li><li>No write down: Users can only write to documents with a higher or equal security.</li><li>This protects against malicious users with high-level clearance from copying information from high-level objects to low-level objects and thus exposing high-level data to low-level users.</li></ul>"
+				},
+				{
+					"question" : "Describe the star property of Bell LaPadula security model and explain why it is required to guarantee confidentiality (hint: you can use an example).",
+					"sources" : "462",
+					"answer" : "<ul><li>*-property: Users can only write to documents with a higher or equal security.</li><li>This protects against malicious users with high-level clearance from copying information from high-level objects to low-level objects and thus exposing high-level data to low-level users.</li></ul>"
+				},
+				{
+					"question" : "The Bell-Lapadula model of security has some limitations for practical use. Explain two of these problems.",
+					"sources" : "468",
+					"answer" : "<ul><li>No functionality for managing downgrading of objects. Sometimes there is a need for information to flow from higher to lower level.</li><li>When consolidating information from multiple sources (of multiple levels) information of lower level will now be classified as higher, this is known as classification creep.</li></ul>"
+				},
+				{
+					"question" : "Describe the Chinese Wall Model (including the elements of the models and the security rules). Which top level security property is guaranteed by this security model?",
+					"sources" : "474-476",
+					"answer" : "The goal of the Chinese Wall Model is to ensure that information can not flow between two corporations being in conict of interest. The objects (i.e. unit of information) are grouped into datasets. Each dataset represents a corporation. Moreover, each dataset belongs to one or more conflict of interest class (CI). The model builds upon two main properties:<ul><li>(ss-rule) a subject can read an object if the object is in a dataset that has been already accessed by the subject OR the object belongs to a CI that has never been accessed by the subject.</li><li>(*-rule) a subject can write an object O if the subject can read the object AND the subject can not read objects outside the dataset of O.</li></ul>"
+				}
+		]
+	},
+
+	"social-engineering" : {
+			"importance" : 8.25,
+			"questions" : [
+				{
+					"question" : "What is meant by the term “social engineering”?",
+					"sources" : "<a href='https://en.wikipedia.org/wiki/Social_engineering_(security)'>wikipedia.org</a>",
+					"answer" : "Social engineering refers to the psychological manipulation of people in order to have them perform actions or divulge confidential information. This could be to gather information, perform fraud, gain unauthorized system access or a number of other security violations."
+				},
+				{
+					"question" : "Describe examples of social engineering and what could be done beyond general education to prevent them from succeeding.",
+					"sources" : "slides 12-13",
+					"answer" : "<ul><li>Trappings of role<ul><li>Example: Person claims to belong to the security consultant company and showing a fake id and ask for access to information.</li><li>Prevention: Demands security consultants to enter passwords to access information. Id can be faked, not passwords.</li></ul></li><li>Distracting from systematic thinking<ul><li>Example: Person calls in right before employee ends their shift, asking urgently for information that should normally go through a long process to be released. If successful the employee will be stressed and give the information without vetting.</li><li>Prevention: Enforce the longer process by not giving employees the possibility to bypass the system.</li></ul></li></ul>"
+				},
+				{
+					"question" : "List and describe 3 human tendencies of behavior that are commonly exploited by social engineers.",
+					"sources" : "slides 12-13",
+					"answer" : "<ul><li>Momentum of compliance<ul><li>Once we’ve started helping a person we’re more prone to help them again, a common technique exploited is to start with a few small problems and then ask for the information they want.</li></ul></li><li>Test with personal information<ul><li>If the person can give us information about ourselves that we didn’t assume them to have but information we’ve given to companies etc. we might assume that they are real representatives and give up information.</li></ul></li><li>Create then fix a problem<ul><li>We are prone to help people that has helped us, we might even feel indebted to help them in return. Therefore a common technique is to create a problem for the target and then help the target with that problem, before asking for the information.</li></ul></li></ul>"
+				},
+				{
+					"question" : "What are the main pieces of advice you give to the people working in the personnel (HR) and economics administration?",
+					"sources" : "slides, page 17",
+					"answer" : "<ul><li>Clear concise protocols that are enforced</li><li>Awareness training (aware of situations that might impair you judgment, such as flattery, helplessness, pressure, stress)</li><li>Resistance training (keep a mindset that doesn’t include trusting everybody)</li><li>Politeness change, “NO” is OK </li><li>Simple rule that ID required for restricted action</li><li>Simple rules to define sensitive information</li><li></li></ul>"
+				},
+				{
+					"question" : "What are typical strategies for social engineering? Briefly explain two and say why they are often successful",
+					"sources" : "exam: 15-01-17",
+					"answer" : "<ul><li>Stress victims by pleading urgency and dire consequences. This works because it impedes rational decision making.</li><li>Help victims solve a problem first. This works because the pressure of reciprocity increases.</li></ul>"
+				}
+		]
+	},
+
+
+	"web-attacks" : {
+			"importance" : 5,
+			"questions" : [
+				{
+					"question" : "How does cross-site scripting work?",
+					"sources" : "<a href='https://www.owasp.org/index.php/Cross-site_Scripting_(XSS)'>www.owasp.org</a>",
+					"answer" : "XSS is a form of attack when malicious scripts are injected into an website which is then ran on the victims browser. The attack can appear anywhere when input gets reflected as output. The malicious code gets executed on the client side."
+				},
+				{
+					"question" : "How does cross-site request forgery work?",
+					"sources" : "<a href='https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)'>www.owasp.org</a>",
+					"answer" : "CSRF is an attack that tricks the victim into making a malicious request. It inherit the victims authentication. Since the attacker can’t see the request CSRF are used for state-changing requests and not theft of data. The malicious code gets executed on the server side."
+				},
+				{
+					"question" : "How can we prevent SQL injection?",
+					"sources" : "",
+					"answer" : "<ul><li>Precompiled queries</li><li>Prepared statements</li><li>Whitelisted input</li></ul>"
+				},
+				{
+					"question" : "Explain briefly how SQL injection works.",
+					"sources" : "183-185",
+					"answer" : "Through some form of input (form, cookies, etc.) the attacker gets access to SQL-code where they can alter, end and/or append to the original query on the server."
+				},
+				{
+					"question" : "Explain briefly what they are and what an attacker can do:<ul><li>Broken Authentication and Session Management</li><li>Insecure Direct Object References</li><li>Cross-Site Request Forgery (CSRF)</li><li>Security Misconfiguration</li><li>Insecure Cryptographic Storage</li><li>Failure to Restrict URL Access</li><li>Insufficient Transport Layer Protection</li><li>Unvalidated Redirects and Forwards</li></ul>",
+					"sources" : "<a href='https://www.owasp.org/index.php/Top_10_2013-Top_10'>www.owasp.org</a>",
+					"answer" : "<ul><li>Broken Authentication and Session Management<ul><li>All aspects of handling user authentication and managing active sessions (CSRF)</li></ul></li><li>Insecure Direct Object References<ul><li>When an application provides direct access to objects based on user-supplied input (for example where user input is used to access a database row, a file, application pages and more)</li></ul></li><li>Cross-Site Request Forgery (CSRF)<ul><li>CSRF is an attack that tricks the victim into making a malicious request. It inherit the victims authentication. Since the attacker can’t see the request CSRF are used for state-changing requests and not theft of data. The malicious code gets executed on the server.</li></ul></li><li>Security Misconfiguration<ul><li>Example: The app server admin console is automatically installed and not removed. Default accounts aren’t changed. Attacker discovers the standard admin pages are on your server, logs in with default passwords, and takes over.</li><li>Example: App server configuration allows stack traces to be returned to users, potentially exposing underlying flaws.</li></ul></li><li>Insecure Cryptographic Storage<ul><li>Example: An application encrypts credit cards in a database to prevent exposure to end users. However, the database is set to automatically decrypt queries against the credit card columns, allowing an SQL injection flaw to retrieve all the credit cards in cleartext. The system should have been configured to allow only back end applications to decrypt them, not the front end web application.</li><li>Example: The password database uses unsalted hashes to store everyone’s passwords. A file upload flaw allows an attacker to retrieve the password file. All the unsalted hashes can be brute forced in 4 weeks, while properly salted hashes would have taken over 3000 years.</li></ul></li><li>Failure to Restrict URL Access<ul><li>Example: http://example.com/app/admin_getappInfo</li><li>If the attacker is not authenticated, and access to either page is granted, then unauthorized access was allowed. If an authenticated, non-admin, user is allowed to access the “admin_getappInfo” page, this is a flaw, and may lead the attacker to more improperly protected admin pages.</li></ul></li><li>Insufficient Transport Layer Protection<ul><li>Example: A site simply doesn’t use SSL for all pages that require authentication. Attacker simply monitors network traffic (like an open wireless or their neighborhood cable modem network), and observes an authenticated victim’s session cookie. Attacker then replays this cookie and takes over the user’s session.</li></ul></li><li>Unvalidated Redirects and Forwards<ul><li>Example: The application uses forwards to route requests between different parts of the site. To facilitate this, some pages use a parameter to indicate where the user should be sent if a transaction is successful. In this case, the attacker crafts a URL that will pass the application’s access control check and then forwards the attacker to administrative functionality for which the attacker isn’t authorized.</li><li>http://www.example.com/boring.jsp?fwd=admin.jsp</li></ul></li></ul>"
+				}
+		]
+	},
+
+	"intrusion-detection" : {
+			"importance" : 3.5,
+			"questions" : [
+				{
+					"question" : "Which attacks can be detected by anomaly detection?",
+					"sources" : "294-295",
+					"answer" : "Anomaly detection aims to define normal and expected behavior in order to identify malicious and unauthorized behavior. Only anomaly detection can catch zero-day attacks. The problem is collecting and analyzing the data and controlling false-negatives and false positives."
+				},
+				{
+					"question" : "Which attacks can be detected by signature-based detection?",
+					"sources" : "297",
+					"answer" : "Signature based detection creates a set of rules or known patterns to define what’s allowed and what’s not allowed. A signature based detection system is better at catching known attacks that can be defined through rules or patterns but cannot catch zero-day attacks since these are, by definition unknown beforehand."
+				},
+				{
+					"question" : "Benefits of host-based intrusion detection systems over network-based ones?",
+					"sources" : "298, 303-304",
+					"answer" : "The primary benefit of host based intrusion detection is that it can detect both external and internal intrusions. Network based IDS cannot detect internal ones. Network based intrusion detection systems also has the drawback of mostly analysing traffic patterns without analysing the actual traffic since the increased usage of SSL (Secure Socket Layer)."
+				},
+				{
+					"question" : "Differences between Host Based and Network Based intrusion detection systems.",
+					"sources" : "298, 303-305",
+					"answer" : "Host based intrusion detection systems is based on the host, monitoring system call traces, log files, etc. in order to detect intrusions. A network based intrusion detection system is based somewhere on the network, this could be inside or outside of an internal or external firewall"
+				},
+				{
+					"question" : "Explain the concepts of false negatives and false positives. Security consequences for each of these two cases?",
+					"sources" : "293-294",
+					"answer" : "<ul><li>False negative: There is an intrusion that isn’t detected by the intrusion detection system. This is bad because it implies a breach of both confidentiality and integrity.</li><li>False positive: The system detects an intrusion and causes an alarm but it was just a regular user doing authorised work. This causes unnecessary overhead for security and management and the work to sort out false positives from true positives.</li></ul>"
+				},
+				{
+					"question" : "How anomaly detection and signature-based detection relate to false positives and negatives.",
+					"sources" : "296-298",
+					"answer" : "<ul><li>Anomaly detection has a stronger issue with the tradeoff between false positive and false negative. It wishes to minimize false-negative (in order to fulfill its purpose) but this causes a high rate of false-positives causing overhead costs to sort out.</li><li>Signature based detection doesn’t have the same tradeoff, it does have a problem with false negatives since it can only catch known attacks a zero day exploit will cause a false negative.</li></ul>"
+				}
+		]
+	},
+
+	"gpg-email" : {
+			"importance" : 3,
+			"questions" : [
+				{
+					"question" : "Alice, who often uses her company’s secure mail server, has just lost her private key but still has the corresponding public key. Answer the following questions both with yes/no and by giving a reason for each.<ul><li>Is she still able to send encrypted mails? What about receiving?</li><li>Is she still able to sign the mails she sends? What about verifying the signatures of mails she receives?</li><li>What must she do to again be able to carry out all the operations mentioned above?</li></ul>",
+					"sources" : "lab G",
+					"answer" : "<ul><li>Is she still able to send encrypted mails? What about receiving?<ul><li>To send encrypted mails you need to encrypt them with the receiver's public key. She cannot receive encrypted mails since you decrypt them with the private key.</li></ul></li><li>Is she still able to sign the mails she sends? What about verifying the signatures of mails she receives?<ul><li>She cannot sign the mails she sends because you sign mails with your private key. She can verify the signatures of mails she receive, they are made with private keys and verified with the corresponding public key.</li></ul><li>What must she do to again be able to carry out all the operations mentioned above?</li><ul><li>She must generate a new key pair and give the corresponding public key to her contacts through a trusted channel.</li></ul></li></ul>"
+				},
+				{
+					"question" : "To secure e-mail, we used gpg in a lab exercise. Alice heard about that and now wants to do the same to exchange e-mails with Bob. Which keys does she need to have in the following cases and what for?<ul><li>Alice sends an e-mail to Bob and signs it.</li><li>Alice receives an encrypted and signed e-mail from Bob.</li><li>Alice wants to send an e-mail to Bob but prevent Carol from reading it.</li><li>Alice suspects that Carol has been sending e-mails to Bob pretending that they come from Alice. Alice wants to avoid that.</li></ul>",
+					"sources" : "lab G",
+					"answer" : "<ul><li>Alice sends an e-mail to Bob and signs it.<ul><li>Her private key. (sign with private, check signature with public)</li></ul></li><li>Alice receives an encrypted and signed e-mail from Bob.<ul><li>Her private key. Bob’s public (encrypt with public, decrypt with private)</li></ul></li><li>Alice wants to send an e-mail to Bob but prevent Carol from reading it.<ul><li>Bob’s public key.</li></ul></li><li>Alice suspects that Carol has been sending e-mails to Bob pretending that they come from Alice. Alice wants to avoid that.<ul><li>Either Alice doesn’t use keys. Then she should create a key pair, give her public key to Bob and tell him to only trust signed mail from her. Or Alice does indeed use keys. Then her private key could have been leaked, then she should generate a new key pair and give Bob her public key and tell him to remove the previous one. Alice should also make sure she keep her private key secure.</li></ul></li></ul>"
+				},
+				{
+					"question" : "Alice and Bob use GnuPG or something similar to send secret messages to each other. Make a diagram and explain how they can do this. Who has which keys, how do they best get them?",
+					"sources" : "lab G",
+					"answer" : "They generate a keypair, both keep  their own private key. They have exchange their corresponding public key in a safe manner (i.e. on a physical note or over the phone). A message encrypted by a public key can only be decrypted by the corresponding private key. For example, Bob can encrypt a message with Alice’s public key and send it, anyone can look at the cipher but only Alice can decrypt it with her private key and read the message."
+				}
+		]
+	},
+
+	"access-control" : {
+			"importance" : 1.875,
+			"questions" : [
+				{
+					"question" : "What is the main difference between discretionary and mandatory access control?",
+					"sources" : "136,462",
+					"answer" : "In discretionary access control an entity may have access right to permit that entity by own volition to enable another entity access to some resource, as long as this doesn’t violate the properties of mandatory access control. This is defined by the ds-property, which is lacking in mandatory access control."
+				},
+				{
+					"question" : "List and explain 2 advantages of role-based access control.",
+					"sources" : "148-150",
+					"answer" : "<ul><li>Creates less overhead for management since there are fewer roles than permutations of access rights, probable cause for widespread commercial use.</li><li>Lends itself to effective implementation of the principle of least privilege since each role is only given access rights needed for that role.</li></ul>"
+				},
+				{
+					"question" : "Alice has started a legal consulting company. She wants to make sure that access to resources are secure and no one unauthorized can get to sensitive data of her clients.<ul><li>How would you advise her to organize access control in the company, taking into account that the company is growing fast and new employees come and go?</li><li>It is important to Alice that client confidentiality is kept and she does not want information from competing clients leak to each other. How can she do this?</li></ul>",
+					"sources" : "147-150, 474-475",
+					"answer" : "<ul><li>How would you advise her to organize access control in the company, taking into account that the company is growing fast and new employees come and go?<ul><li>Because the company is growing fast and new employees come and go I would suggest a Role Based Access Control. This creates less overhead on maintaining an overview of who has access to what which should lead to better security overall.</li></ul></li><li>It is important to Alice that client confidentiality is kept and she does not want information from competing clients leak to each other. How can she do this?<ul><li>A natural way to enforce this would be to implement The Chinese Wall Model. CWM enforces confidentiality for conflicting interests by maintaining two properties:<ul><li>ss-property: A user can only read a dataset if the has previously accessed it OR if the user have not previously accessed any dataset in that confidentiality class.</li><li>*-property: A user can only write to a dataset if the user can read it AND if the user haven’t accessed any other confidentiality class.</li></ul></li></ul></li></ul>"
+				}
+		]
+	},
+
+
+
+
+	"security-principles" : {
+			"importance" : 1.5,
+			"questions" : [
+				{
+					"question" : "Explain the following fundamental principles<ul><li>Economy of the Mechanism</li><li>Fail-safe default</li><li>Complete mediation</li><li>Open design</li><li>Separation of privilege</li><li>Least privilege</li><li>Least common mechanism</li><li>Psychological acceptability</li><li>Isolation</li><li>Encapsulation</li><li>Modularity</li><li>Layering</li><li>Least astonishment</li></ul>",
+					"sources" : "48-51",
+					"answer" : "<ul><li>Economy of the Mechanism: The design of the security measures should be as simple and small as possible. Simple and small designs are easier to test, verify and are less exploitable.</li><li>Fail-safe default: Access should be based on permission rather than exclusion. Failure to provide access that should be granted is less dangerous than failure to prevent access that should have been denied.</li><li>Complete mediationn: Every access should pass the access control mechanism and access control should never rely on cache-content for access rights.</li><li>Open design: The design of the security mechanism should be open rather than secret. This is so it can be reviewed by many experts and increase the confidence.</li><li>Separation of privilege: Multiple privilege attributes should be required to achieve access to a restricted resource, for example multifactor authentication.</li><li>Least privilege: Every process and every user should operate using the least set of privileges necessary to perform their task. This should include temporary aspects (only access in times needed).</li><li>Least common mechanism: The design should minimize the functions shared by different users, providing mutual security. This, for example, narrows the search space and makes it easier to track the problem after an intrusion.</li><li>Psychological acceptability: The security mechanisms should not interfere unduly with the work of users. If they do there’s a greater risk that users opt-out and turn them off.</li><li>Isolation: 1) Public access should be isolated from critical resources to prevent malicious tampering. 2) Processes and files of individual users should be isolated from each other unless explicitly desired. 3) Security mechanisms should be isolated from access so as not to be turned off if the system gets attacked.</li><li>Encapsulation: Access data and procedures of a process should be protected and only accessible through designed entry points.</li><li>Modularity: The security design should be modular so that individual parts of the security design can be upgraded without the requirement to modify the entire system.</li><li>Layering: A system should use multiple overlapping protection approaches so that the failure of one system won’t leave the system unprotected. Related to separation of privilege.</li><li>Least astonishment: A program should always respond in the way that is least likely to astonish the user.</li></ul>"
+				}
+		]
+	},
+
+
+	"software-security" : {
+			"importance" : 1.5,
+			"questions" : [
+				{
+					"question" : "Name and explain two strategies of defensive programming",
+					"sources" : "400-416",
+					"answer" : "<ul><li>Write a lot of tests for your code, this could include input fuzzying to protect against unforeseen input and effects.</li><li>Validate and verify input, size, form (regular expression) and datatype to minimize the risk of buffer overflow and SQL injection.</li><li>Ensure the correct implementation of algorithms and control that the machine code corresponds to the algorithm.</li><li>Ensure that you release memory that has been allocated to avoid memory leaks in programming languages like C, or use languages like Java or C# that implements garbage collection.</li><li>Prevent race conditions in concurrent programming by using concurrent data structures that support atomic actions.</li></ul>"
+				},
+				{
+					"question" : "How can you avoid race conditions?",
+					"sources" : "416",
+					"answer" : "First, carefully partition the program and look at where race conditions can be avoided by performing the operations in a sound order. If race conditions still exist, then see if they can be accessed through concurrent data structures that ensure atomic actions, synchronized methods or implement semaphores/locks to remove the possibility of race conditions."
+				}
+		]
+	},
+
+
+
+	"honeypots" : {
+			"importance" : 0.25,
+			"questions" : [
+				{
+					"question" : "Give two reasons for deploying honeypots.",
+					"sources" : "314",
+					"answer" : "<ul><li>To identify attacks on the system that bypass regular IDS and firewalls. Since regular users don’t access the honeypot system any access to the honeypot will be of a malicious attacker.</li><li>Because the attacker is unaware of the honeypot, administrators have time to mobilize, log and track the attacker without exposing productive systems.</li></ul>"
+				},
+				{
+					"question" : "Where would you place a honeypot? Explain why.",
+					"sources" : "315-316",
+					"answer" : "TL DR; tradeoff between probability of catching attacker in honeypot and opening up your firewall to allow access to honeypot, compromize would be to put it in the DMZ.<br><br>The three possible places are outside the firewall, in the DMZ and in the internal network. A honeypot on the outside is useful to track attempts to use unused IP-addresses of your network, it also attract several attacks, reducing the burden on the firewall. The downside is that it has little to no ability to detect or trap internal attackers or attacks that have successfully gone past the firewall.<br><br>To trap internal attackers you have to put the honeypot in the internal network but there is a tradeoff in the firewall settings. If it blocks access to the addresses in the honeypot it will limit the effectiveness of the honeypot, if it allows access beyond what is regularly permissible it risks opening up a new attack vector. If the honeypot is internal you also have to make sure that it cannot attack the rest of the internal network were it to be compromised. <br><br>Where you choose to place the honeypot is a tradeoff between catching internal attackers and having your firewall open up traffic that isn’t permissible otherwise and exposing your internal network to the honeypot. A compromise would be to place it in the DMZ where it could catch attacks bypassing the firewall but if compromised the honeypot doesn’t expose the internal network, only web and E-mail servers."
+				}
+		]
+	}
+
+};
+
